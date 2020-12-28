@@ -6,13 +6,14 @@ from datetime import date, datetime
 def cabinets(request):
     if request.method == 'GET':
         name = request.user.get_username()
-        date_today = str(date.today())
+        date_today = date.today()
         cabs = Cabinet.objects.all().order_by('room_number')
         bookings = []
         for cab in cabs:
-            bookings.append(Booking.objects.filter(cabinet=cab).order_by('booking_start') or '-')
+            bookings.append(Booking.objects.filter(cabinet=cab, booking_end__gte=date_today).order_by('booking_start') or '-')
 
         cb = list(zip(cabs, bookings))
+        date_today = str(date_today)
         context = {'context': cb, 'name': name, 'date': date_today}
         return render(request, 'cabinets.html', context)
 
@@ -54,8 +55,9 @@ def cabinets(request):
 def cabinet(request, room):
     name = request.user.get_username()
     cab = Cabinet.objects.get(room_number=room)
-    booking = Booking.objects.filter(cabinet=cab).order_by('booking_start')
-    date_today = str(date.today())
+    date_today = date.today()
+    booking = Booking.objects.filter(cabinet=cab, booking_end__gte=date_today).order_by('booking_start')
+    date_today = str(date_today)
     context = {'cab': cab, 'booking': booking, 'name': name, 'date': date_today}
     return render(request, 'cabinet.html', context)
 

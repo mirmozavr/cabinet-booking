@@ -65,9 +65,18 @@ def book_date(request, room):
         name = request.user
         begin = request.POST.get('begin')
         finish = request.POST.get('finish')
+        begin = datetime.strptime(begin, '%Y-%m-%d').date()
+        finish = datetime.strptime(finish, '%Y-%m-%d').date()
         if begin > finish:
             return redirect(f'/cabinet/{room}')
         cab = Cabinet.objects.get(room_number=room)
+
+        asked = Booking(booking_start=begin, booking_end=finish)
+
+        for book in Booking.objects.filter(cabinet=cab):
+            if asked.intersect(book):
+                return redirect(f'/cabinet/{room}')
+
         Booking.objects.create(cabinet=cab, booking_start=begin, booking_end=finish, customer=name)
 
         return redirect(f'/cabinet/{room}')

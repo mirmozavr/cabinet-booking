@@ -3,19 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
+
+  <style>
+   table.text  {
+    width:  100%;
+    border-spacing: 0;
+   }
+   table.text td {
+    width: 50%;
+    vertical-align: top;
+   }
+   td.rightcol {
+    text-align: right;
+   }
+  </style>
+
 </head>
 <body>
+<table class="text">
+    <tr>
+        <td>
+            <a href="/">Main</a>
+            <a href="/cabinets">Cabinets</a>
+            {% if not name %}
+            <a href="/register">Registration</a>
+            <a href="/login">Login</a>
+            {% endif %}
 
-<a href="/">Main</a>
-<a href="/cabinets">Cabinets</a>
-<a href="/register">Registration</a>
-<a href="/login">Login</a>
-<a href="/logout">LogOut</a>
-{% if name %}
-Current user: <b>{{ name }}</b>
-{% endif %}
+        </td>
+        <td class="rightcol">
+            {% if name %}
+            <a href="/logout">LogOut</a>
+            Current user: <b>{{ name }}</b>
+            {% endif %}
+        </td>
+    </tr>
+
+
+</table>
 
 {% block content %}{% endblock %}
-
 </body>
 </html>

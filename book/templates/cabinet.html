@@ -7,7 +7,7 @@
 {% block content %}
 
 {% if name %}
-        <form action="/book-date/{{ cab.pk }}" method="POST">
+        <form action="/book-date/{{ cab.room_number }}" method="POST">
             {% csrf_token %}
             <td><input type="date" name="begin" min="{{ date }}" required></td>
             <td><input type="date" name="finish" min="{{ date }}" required></td>

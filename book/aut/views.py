@@ -9,9 +9,8 @@ def index(request):
     name = request.user.get_username()
     # print('NAME!!!', name)
     if name:
-        return render(request, 'base.html', {'name': name})
-    return render(request, 'base.html')
-
+        return render(request, 'index.html', {'name': name})
+    return render(request, 'index.html')
 
 
 def register(request):

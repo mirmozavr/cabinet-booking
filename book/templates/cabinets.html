@@ -25,7 +25,7 @@ Cabinets
     </tr>
     {% for cabinet, booking in context %}
     <tr>
-        <td><a href="/cabinet/{{ cabinet.pk }}">{{ cabinet }}</a></td>
+        <td><a href="/cabinet/{{ cabinet.room_number }}">{{ cabinet }}</a></td>
         <td>
             {% for book in booking %}
             {{ book }}

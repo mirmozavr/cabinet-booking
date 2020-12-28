@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}
+   Registration
+{% endblock %}
+
+{% block content %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    <label>Login</label>
+    <br>
+    <input type="text" name="login" required>
+    <br>
+    <label>Password</label>
+    <br>
+    <input type="password" name="pass1" required>
+    <br>
+    <label>Confirm password</label>
+    <br>
+    <input type="password" name="pass2" required>
+    <br>
+    <input type="submit" value="Register">
+</form>
+
+{% endblock %}

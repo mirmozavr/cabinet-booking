@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}
+Cabinets
+{% endblock %}
+
+{% block content %}
+
+{% if name %}
+<form action="/cabinets/" method="POST">
+    {% csrf_token %}
+    <label>Найти свободный кабинет</label>
+    <br>
+    <td><input type="date" name="begin" min="{{ date }}"></td>
+    <td><input type="date" name="finish" min="{{ date }}"></td>
+    <td><input type="submit" value="Найти"></td>
+</form>
+{% endif %}
+
+<br>
+<table border="1">
+    <tr>
+        <th>Кабинет</th>
+        <th>Занятые даты</th>
+    </tr>
+    {% for cabinet, booking in context %}
+    <tr>
+        <td><a href="/cabinet/{{ cabinet.pk }}">{{ cabinet }}</a></td>
+        <td>
+            {% for book in booking %}
+            {{ book }}
+            <br>
+            {% endfor %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+{% endblock %}
+

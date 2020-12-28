@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+
+<a href="/">Main</a>
+<a href="/cabinets">Cabinets</a>
+<a href="/register">Registration</a>
+<a href="/login">Login</a>
+<a href="/logout">LogOut</a>
+{% if name %}
+Current user: <b>{{ name }}</b>
+{% endif %}
+
+{% block content %}{% endblock %}
+
+</body>
+</html>

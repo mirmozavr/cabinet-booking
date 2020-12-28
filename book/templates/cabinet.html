@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ cab }}
+{% endblock %}
+
+{% block content %}
+
+{% if name %}
+        <form action="/book-date/{{ cab.pk }}" method="POST">
+            {% csrf_token %}
+            <td><input type="date" name="begin" min="{{ date }}" required></td>
+            <td><input type="date" name="finish" min="{{ date }}" required></td>
+            <td><input type="submit" value="Бронировать"></td>
+        </form>
+{% endif %}
+<br>
+<table border="1">
+    <tr>
+        <th>Кабинет</th>
+        <th>Занятые даты</th>
+    </tr>
+
+    <tr>
+        <td>{{ cab }}</td>
+        <td>
+            {% for book in booking %}
+            {{ book }}
+            <br>
+            {% endfor %}
+        </td>
+    </tr>
+</table>
+
+
+{% endblock %}
+

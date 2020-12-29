@@ -9,20 +9,22 @@ Cabinets
 {% if name %}
 <form action="/cabinets/" method="POST">
     {% csrf_token %}
-    <label>Найти свободный кабинет</label>
-    <br>
+    <p class="font-weight-light">Найти свободный кабинет</p>
     <td><input type="date" name="begin" min="{{ date }}"></td>
     <td><input type="date" name="finish" min="{{ date }}"></td>
-    <td><input type="submit" value="Найти"></td>
+    <td><input class="btn btn-light btn-sm" type="submit" value="Найти"></td>
 </form>
 {% endif %}
 
 <br>
-<table border="1">
+<table class="table table-sm table-bordered">
+    <thead>
     <tr>
-        <th>Кабинет</th>
-        <th>Занятые даты</th>
+        <th scope="col">Кабинет</th>
+        <th scope="col">Занятые даты</th>
     </tr>
+    </thead>
+    <tbody>
     {% for cabinet, booking in context %}
     <tr>
         <td><a href="/cabinet/{{ cabinet.room_number }}">{{ cabinet }}</a></td>
@@ -34,6 +36,7 @@ Cabinets
         </td>
     </tr>
     {% endfor %}
+    </tbody>
 </table>
 
 

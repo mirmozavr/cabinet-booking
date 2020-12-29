@@ -13,7 +13,7 @@ def index(request):
     return render(request, 'index.html')
 
 
-def register(request):
+def register_user(request):
     if request.method == 'POST':
         user_name = request.POST.get('login')
         user_pass1 = request.POST.get('pass1')

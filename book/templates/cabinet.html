@@ -7,20 +7,22 @@
 {% block content %}
 
 {% if name %}
-        <form action="/book-date/{{ cab.room_number }}" method="POST">
-            {% csrf_token %}
-            <td><input type="date" name="begin" min="{{ date }}" required></td>
-            <td><input type="date" name="finish" min="{{ date }}" required></td>
-            <td><input type="submit" value="Бронировать"></td>
-        </form>
+<form action="/book-date/{{ cab.room_number }}" method="POST">
+    {% csrf_token %}
+    <td><input type="date" name="begin" min="{{ date }}" required></td>
+    <td><input type="date" name="finish" min="{{ date }}" required></td>
+    <td><input class="btn btn-light btn-sm" type="submit" value="Бронировать"></td>
+</form>
 {% endif %}
 <br>
-<table border="1">
+<table class="table table-sm table-bordered">
+    <thead>
     <tr>
         <th>Кабинет</th>
         <th>Занятые даты</th>
     </tr>
-
+    </thead>
+    <tbody>
     <tr>
         <td>{{ cab }}</td>
         <td>
@@ -30,6 +32,7 @@
             {% endfor %}
         </td>
     </tr>
+    </tbody>
 </table>
 
 

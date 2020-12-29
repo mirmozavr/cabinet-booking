@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <style>
    table.text  {
     width:  100%;
@@ -23,25 +23,25 @@
 <table class="text">
     <tr>
         <td>
-            <a href="/">Main</a>
-            <a href="/cabinets">Cabinets</a>
+            <a href="/"><button type="button" class="btn btn-primary btn-sm">Main</button></a>
+            <a href="/cabinets"><button type="button" class="btn btn-primary btn-sm">Cabinets</button></a>
             {% if not name %}
-            <a href="/register">Registration</a>
-            <a href="/login">Login</a>
+            <a href="/register"><button type="button" class="btn btn-primary btn-sm">Registration</button></a>
+            <a href="/login"><button type="button" class="btn btn-primary btn-sm">Login</button></a>
             {% endif %}
 
         </td>
         <td class="rightcol">
             {% if name %}
-            <a href="/logout">LogOut</a>
             Current user: <b>{{ name }}</b>
+            <a href="/logout"><button type="button" class="btn btn-info btn-sm">LogOut</button></a>
             {% endif %}
         </td>
     </tr>
 
 
 </table>
-
+<p class="font-weight-light" style="color: red">{{ error }}</p>
 {% block content %}{% endblock %}
 </body>
 </html>

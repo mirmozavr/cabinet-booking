@@ -19,13 +19,15 @@ def register_user(request):
         user_pass1 = request.POST.get('pass1')
         user_pass2 = request.POST.get('pass2')
 
+        if User.objects.filter(username=user_name):
+            return render(request, 'register.html', {'error': 'Login already taken'})
         if user_pass1 != user_pass2:
             return render(request, 'register.html', {'error': 'Passwords dont match'})
         print(user_name, user_pass1)
         u = User.objects.create_user(username=user_name, password=user_pass1)
         u.save()
 
-        return redirect('/login_user')
+        return redirect('/login')
 
     if request.method == 'GET':
         return render(request, 'register.html')
@@ -42,7 +44,7 @@ def login_user(request):
             login(request, user)
             return redirect('/')
         else:
-            return redirect('/login')
+            return render(request, 'login.html', {'error': 'Try again'})
 
 
 def logout_user(request):

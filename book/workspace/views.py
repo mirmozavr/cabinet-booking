@@ -27,9 +27,6 @@ def cabinets(request):
         begin = datetime.strptime(begin, '%Y-%m-%d').date()
         finish = datetime.strptime(finish, '%Y-%m-%d').date()
 
-        print('bb', begin, type(begin))
-        print('ff', finish, type(finish))
-
         asked = Booking(booking_start=begin, booking_end=finish)
         cabs = []
         for cab in Cabinet.objects.all().order_by('room_number'):
@@ -52,13 +49,13 @@ def cabinets(request):
         return render(request, 'cabinets.html', context)
 
 
-def cabinet(request, room):
+def cabinet(request, room, error=''):
     name = request.user.get_username()
     cab = Cabinet.objects.get(room_number=room)
     date_today = date.today()
     booking = Booking.objects.filter(cabinet=cab, booking_end__gte=date_today).order_by('booking_start')
     date_today = str(date_today)
-    context = {'cab': cab, 'booking': booking, 'name': name, 'date': date_today}
+    context = {'cab': cab, 'booking': booking, 'name': name, 'date': date_today, 'error': error}
     return render(request, 'cabinet.html', context)
 
 
@@ -77,7 +74,7 @@ def book_date(request, room):
 
         for book in Booking.objects.filter(cabinet=cab):
             if asked.intersect(book):
-                return redirect(f'/cabinet/{room}')
+                return cabinet(request, room, error='Date is occupied')
 
         Booking.objects.create(cabinet=cab, booking_start=begin, booking_end=finish, customer=name)
 

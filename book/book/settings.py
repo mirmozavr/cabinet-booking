@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
-
+import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +25,7 @@ SECRET_KEY = 'l7ox0i9$b=r_lduloj%y%(6=buw($-jt0#$mpn71ij=90)22d_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'cabinet-booking.herokuapp.com']
+ALLOWED_HOSTS = ['*'] #  ['127.0.0.1', 'cabinet-booking.herokuapp.com']
 
 
 # Application definition
@@ -124,3 +124,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)

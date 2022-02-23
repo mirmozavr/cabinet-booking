@@ -10,6 +10,7 @@ class Cabinet(models.Model):
 
 
 class Booking(models.Model):
+    id = models.AutoField(primary_key=True)
     booking_start = models.DateField()
     booking_end = models.DateField()
     cabinet = models.ForeignKey(Cabinet, on_delete=models.CASCADE)

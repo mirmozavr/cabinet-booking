@@ -9,10 +9,10 @@ Cabinets
 {% if name %}
 <form action="/cabinets/" method="POST">
     {% csrf_token %}
-    <p class="font-weight-light">Найти свободный кабинет</p>
+    <p class="font-weight-light">Find cabinet</p>
     <td><input type="date" name="begin" min="{{ date }}"></td>
     <td><input type="date" name="finish" min="{{ date }}"></td>
-    <td><input class="btn btn-light btn-sm" type="submit" value="Найти"></td>
+    <td><input class="btn btn-light btn-sm" type="submit" value="Find"></td>
 </form>
 {% endif %}
 
@@ -20,8 +20,8 @@ Cabinets
 <table class="table table-sm table-bordered">
     <thead>
     <tr>
-        <th scope="col">Кабинет</th>
-        <th scope="col">Занятые даты</th>
+        <th scope="col">Cabinets</th>
+        <th scope="col">Reservations</th>
     </tr>
     </thead>
     <tbody>
